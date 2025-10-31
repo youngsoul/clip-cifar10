@@ -22,7 +22,7 @@ SOLVER = 'liblinear'
 # root_dir = str(Path(__file__).parent.resolve()) + "/CIFAR-10-images"
 
 
-target_dirs = ['car', 'motorcycle', 'truck', 'frog']
+target_dirs = ['car', 'motorcycle', 'truck', 'bird', 'cat', 'dog', 'frog']
 root_dir = str(Path(__file__).parent.resolve()) + "/drone_images"
 
 # show _all_ columns when you print a DataFrame:

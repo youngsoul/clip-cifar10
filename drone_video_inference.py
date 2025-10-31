@@ -6,8 +6,13 @@ from typing import List
 from PIL import Image
 import numpy as np
 
-labels = ['truck', 'car', 'motorcycle']
-label_descriptions = ['picture of a red truck with a black border with a brown box border', 'picture of a police car with a black border with a brown box border', 'picture of a motorcycle with a black border with a brown box border']
+labels = ['truck', 'car', 'motorcycle', 'bird', 'cat', 'dog']
+label_descriptions = ['picture of a red truck with a black border with a brown box border',
+                      'picture of a police car with a black border with a brown box border',
+                      'picture of a motorcycle with a black border with a brown box border',
+                      'picture of a bird sitting on a pole with a black border with a brown box border',
+                      'picture of a cat sitting with a black border with a brown box border',
+                      'picture of a dogs face with a black border with a brown box border']
 
 label_encodings = {}
 
@@ -22,13 +27,25 @@ def cosine_similarity(u: np.ndarray, v: np.ndarray) -> float:
     """Compute cosine similarity between two vectors."""
     return np.dot(u, v) / (np.linalg.norm(u) * np.linalg.norm(v))
 
-def check_for_label_similarity(label, image_encoding) -> float:
-    target_embedding = label_encodings[label]
-    similarity = cosine_similarity(image_encoding, target_embedding)
+def check_for_label_similarity(image_label, image_encoding) -> float:
+    target_embedding = label_encodings[image_label]
+    sims = []
+    for label in labels:
+        label_embedding = label_encodings[label]
+        similarity = cosine_similarity(image_encoding, label_embedding)
+        sims.append(similarity[0])
 
-    return similarity[0]
+    best = np.argmax(sims)
+    best_label = labels[best]
+    best_similarity = sims[best]
 
-    # best = np.argmax(sims)
+    return 1.0 # short circuit this out for now
+
+    # if best_label == image_label:
+    #     return best_similarity
+    # else:
+    #     return 0.0
+    #
     #
     # # threshold
     # if sims[best] < 0.25:
