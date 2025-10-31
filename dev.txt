@@ -1,0 +1,120 @@
+data set:  
+
+https://www.cs.toronto.edu/~kriz/cifar.html
+https://github.com/YoongiKim/CIFAR-10-images/tree/master
+
+CIFAR-10 python version
+
+Medium Blog Post
+
+https://pub.aimind.so/build-a-resnet-from-scratch-with-tensorflow-2-and-keras-0be0d4c19271
+
+
+## Solver:  SAGA
+# Takes a long time to train
+
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/bin/python /Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/model_pipeline.py
+Training the model
+Generating image embeddings for dir: train
+Embeddings file already exists. Skipping.
+(50000, 512)
+(50000,)
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+[0.8626 0.8655 0.8654 0.8633 0.8698]
+Accuracy: 0.87 (+/- 0.00)
+[Parallel(n_jobs=1)]: Done   5 out of   5 | elapsed: 37.4min finished
+/Users/patrickryan/Development/machinelearning/scikit-learn/clip-cifar10/.venv/lib/python3.13/site-packages/sklearn/linear_model/_sag.py:348: ConvergenceWarning: The max_iter was reached which means the coef_ did not converge
+  warnings.warn(
+Training time: 2802.378175973892
+Validating the model
+Generating image embeddings for dir: test
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.52, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+(10000, 512)
+(10000,)
+0.862
+Validation time: 29.455108165740967
+Total time: 2831.8333168029785
+
+Process finished with exit code 0
+
+
+## Solver: liblinear
+Fast to train
+roughly the same accuracy
+
+Training the model
+Generating image embeddings for dir: train
+Embeddings file already exists. Skipping.
+(50000, 512)
+(50000,)
+
+
+[Parallel(n_jobs=1)]: Done   5 out of   5 | elapsed:  3.5min finished
+[0.8633 0.8674 0.8664 0.863  0.8712]
+Accuracy: 0.87 (+/- 0.00)
+Training the model on all of the data
+
+Training time: 261.8726990222931
+
+Validating the model
+Generating image embeddings for dir: test
+Embeddings file already exists. Skipping.
+0.8603
+
+Validation time: 0.010624885559082031
+Total time: 261.88336420059204
+
+Process finished with exit code 0
+
+
+
+
+
+
+Training the model
+Generating image embeddings for dir: train
+Embeddings file already exists. Skipping.
+(50000, 512)
+(50000,)
+
+[Parallel(n_jobs=1)]: Done   5 out of   5 | elapsed:  3.5min finished
+[0.8633 0.8674 0.8664 0.863  0.8712]
+Training Accuracy: 0.87 (+/- 0.00)
+Training the model on all of the data
+
+
+Training time: 261.6984488964081
+Validating the model
+Generating image embeddings for dir: test
+Embeddings file already exists. Skipping.
+
+Test Accuracy:  0.8603
+
+Confusion Matrix:
+Predicted   airplane  automobile  bird  cat  deer  dog  frog  horse  ship  truck
+Actual
+airplane         904           3    23    6    10    0     3      5    24     22
+automobile         5         937     1    6     2    1     0      0     7     41
+bird              29           0   769   38    70   19    52     14     7      2
+cat                8           3    42  752    31   98    48     10     2      6
+deer               3           0    42   38   823    7    48     32     4      3
+dog                3           1    16  106    23  810    20     18     3      0
+frog               3           1    26   44    34   22   863      3     4      0
+horse             15           0    15   24    38   21     3    879     1      4
+ship              31           8     4    8     1    3     1      1   931     12
+truck             10          39     0    2     0    0     3      2     9    935
+
+[10 rows x 10 columns]
+Validation time: 0.024964094161987305
+Total time: 261.72344875335693
+
+Process finished with exit code 0
