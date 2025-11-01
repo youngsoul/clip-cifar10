@@ -30,6 +30,19 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.width', None)       # auto‐wrap to your terminal width
 pd.set_option('display.max_colwidth', None)  # don't truncate column contents
 
+
+def delete_artifacts():
+    """Delete old artifact files if they exist before running the pipeline."""
+    base_dir = Path(__file__).parent.resolve()
+    for fname in ["embeddings.joblib", "model.joblib", "valid_embeddings.joblib"]:
+        fpath = base_dir / fname
+        if fpath.exists():
+            try:
+                fpath.unlink()
+                print(f"Deleted existing artifact: {fpath}")
+            except Exception as e:
+                print(f"Warning: could not delete {fpath}: {e}")
+
 def generate_image_embeddings(embeddings_file: str = "embeddings.joblib", dir_name: Literal['train','test'] = 'train'):
     """
     Generates image embeddings for the specified directory and saves them to a specified file.
@@ -242,6 +255,9 @@ def validate(model: LogisticRegression, validate_embeddings_file: str = "valid_e
 
 
 if __name__ == "__main__":
+    # Ensure previous run artifacts are removed before starting the pipeline
+    delete_artifacts()
+
     total_s = time.time()
     s = time.time()
     model = train()
